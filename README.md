@@ -4,7 +4,7 @@ For Unit 8 assignment.
 
 Explanation as to why I didn't finish my part of Project 1:
 
-First, I really don't have a complete grasp of jQuery. To be honest, whenever we have pre-class drills, or an In-Class assignment where I have to "fill in the blanks," I just stare at the code without a clue how to start anything from scratch. Even with my homework, I just have no idea how to create anything out of thin air, and often have to resort to searching online for anything code resembling what might be necessary to any assignment.
+First, I really don't have a complete grasp of jQuery. To be honest, whenever we have pre-class drills, or an In-Class assignment where I have to "fill in the blanks," I just stare at the code without a clue how to start anything from scratch. Even with my homework, I just have no idea how to create anything out of thin air, and often have to resort to searching online for any code resembling what might be necessary for any assignment.
 If I had known from the beginning that all the necessary code for everything was available in the In-Class assignments, I know I would have been better off. But I guess I didn't know that in the first few weeks. And so I was always scrambling to find any comprehensible code from the internet. (Sorry--this is going to be a long-winded ReadMe.)
 So I feel like I've fallen behind trying to catch up--especially when we started jQuery and Ajax calls and APIs, etc.
 And when my Firebase assignment didn't work, I felt REALLY behind.
