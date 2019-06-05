@@ -16,6 +16,6 @@ But both triposo.com and tomtom.com had "latitude" and "longitude" searches. (Pu
 Greg showed me OpenCageData.com (his code is in the "gregs-APIKey.js" file), which had an API which could convert a "city" search into a lat./long., and vice versa. 
 Well, my knowledge of jQuery was definitely not extensive enough to be able to use the OpenCageData API to tell the Triposo/TomTom API what to do. (I don't even know how to manipulate the jQuery code to create a div and output for the search results.)
 
-Well, anyway, my APIKey from tomtom.com is in the "my-APIKey.js" file, and my "things-to-do.js" file is incomplete because I asked Garry for his code for his "grub (things to eat)" JS file and tried to change it to fit my search--and there might be some old Triposo links on it. I just had no idea what to put in my "things-to-do.js" file and had no idea how the code worked.
+Well, anyway, my APIKey from OpenCageData.com is in the "my-APIKey.js" file, and my "things-to-do.js" file is incomplete because I asked Garry for his code for his "grub (things to eat)" JS file and tried to change it to fit my search--and there might be some old Triposo links on it. I just had no idea what to put in my "things-to-do.js" file and had no idea how the code worked.
 
 Anyway, sorry for this long-winded ReadMe. Hope everyone else in the group does well.
