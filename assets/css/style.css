@@ -1,0 +1,16 @@
+.jumbotron {
+    margin-top: 20px;
+    background-image: url(../images/smith-rock.jpg);
+    background-size: cover;
+}
+
+.display-4 {
+    font-family: 'Frijole', cursive;
+    font-size: 45px;
+    color: #A0522D;
+    text-shadow:
+        -1px -1px 0 #000000,
+        1px -1px 0 #000000,
+        -1px 1px 0 #000000,
+        1px 1px 0 #000000;
+}
