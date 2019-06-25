@@ -1,7 +1,7 @@
 # On the Beaten Path
 An app to help the traveling hiker find trails within their destination's vicinity
 
-https://andrewsrea.github.io/Project-1/
+https://andrewsrea.github.io/Project-1/beaten-path.html
 
 You're an avid hiker at home. But when you're traveling, how do you find trails to hike when you're visiting a new destination?
 Let the On the Beaten Path app help you find those trails--so you can do what you love: Get hiking!
