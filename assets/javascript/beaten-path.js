@@ -1,56 +1,14 @@
-var apikey = '0a1ff0055a9c47ba9f37c072144bad31';
-var placename = '';
+var latitude;
+var longitude;
 
-var api_url = 'https://api.opencagedata.com/geocode/v1/json'
+function openCageRun() {
 
-var request_url = api_url
-    + '?q=' + encodeURIComponent(placename)
-    + '&key=' + apikey
-    + '&language=en'
-    + '&pretty=1'
+  var openCageAPIkey = "0a1ff0055a9c47ba9f37c072144bad31";
+  var placename = $("#hike-input").val().trim();
 
-// see full list of required and optional parameters:
-// https://opencagedata.com/api#forward
-
-var request = new XMLHttpRequest();
-request.open('GET', request_url, true);
-
-request.onload = function() {
-    // see full list of possible response codes:
-    // https://opencagedata.com/api#codes
-
-    if (request.status == 200){ 
-      // Success!
-      var data = JSON.parse(request.responseText);
-      alert(data.results[0].formatted);
-
-    } else if (request.status <= 500){ 
-      // We reached our target server, but it returned an error
-                           
-      console.log("unable to geocode! Response code: " + request.status);
-      var data = JSON.parse(request.responseText);
-      console.log(data.status.message);
-    } else {
-      console.log("server error");
-    }
-};
-
-request.onerror = function() {
-    // There was a connection error of some sort
-    console.log("unable to connect to server");        
-};
-
-request.send();  // make the request
-
-results.geometry.lat
-results.geometry.long
-
-function searchHikingData(artist) {
-
-  // Querying the bandsintown api for the selected artist, the ?app_id parameter is required, but can equal anything
-  var hikeAPIKey = '200495939-f44a49ad3853a6a476cf74f933ac6797';
-  var queryURL = "https://www.hikingproject.com/data/get-trails?lat=" + latitude + "&lon=" + logitude + "&maxDistance=10&key=" + hikeAPIKey;
-  
+  // Querying the OpenCage api for the selected artist, the ?app_id parameter is required, but can equal anything
+  var queryURL = "https://api.opencagedata.com/geocode/v1/json?q=" + placename + "&key=" + openCageAPIkey + "&language=en&pretty=1";
+      
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -59,28 +17,46 @@ function searchHikingData(artist) {
     // Printing the entire object to console
     console.log(response);
 
-    // Constructing HTML containing the artist information
-    var hikeName = $("<h1>").text(response.trails.name);
-    var hikeImage = $("<img>").attr("src", response.trails.imgSqSmall);
-    var hikeSummary = $("<p>").text(response.trails.summary);
-    var hikeLength = $("<h2>").text("Trail length: " + response.trails.length);
-    var hikeCondition = $("<p>").text(response.trails.conditionDetails);
-    var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " upcoming events");
-    var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
+    // Constructing HTML containing the lat/long information
+    latitude = response.results[0].geometry.lat;
+    longitude = response.results[0].geometry.lng;
+        
+    // Querying the Hiking Project api for the selected location (lat/long), the ?app_id parameter is required, but can equal anything
+    var hikeAPIKey = "200495939-f44a49ad3853a6a476cf74f933ac6797";
+    var corsURL = "https://cors-anywhere.herokuapp.com/";
+    var hikeQueryURL = corsURL + "https://www.hikingproject.com/data/get-trails?lat=" + latitude + "&lon=" + longitude + "&maxDistance=10&key=" + hikeAPIKey;
 
-    // Empty the contents of the artist-div, append the new artist content
-    $("#hiking-info").empty();
-    $("#hiking-info").append(hikeName, hikeImage, hikeSummary, hikeLength, hikeCondition, goToArtist);
+    $.ajax({
+      url: hikeQueryURL,
+      method: "GET"
+    }).then(function(hikeResponse) {
+
+      // Printing the entire object to console
+      console.log(hikeResponse);
+
+      for(i = 0; i < hikeResponse.trails.length; i++) {
+
+        // Constructing HTML containing the trail location information
+        var hikeName = $("<h1>").text(hikeResponse.trails[i].name);
+        var hikeImage = $("<img>").attr("src", hikeResponse.trails[i].imgSqSmall);
+        var hikeLength = $("<h4>").text("Trail length: " + hikeResponse.trails[i].length);
+        var hikeCondition = $("<p>").text("Current Trail Conditions: " + hikeResponse.trails[i].conditionStatus + ": " + hikeResponse.trails[i].conditionDetails);
+        var hikeSummary = $("<p>").text(hikeResponse.trails[i].summary);
+
+        // Empty the contents of the "hiking info" div, append the new hiking trail content
+        // $("#hiking-info").empty();
+        $("#hiking-info").append(hikeName, hikeImage, hikeSummary, hikeLength, hikeCondition);
+      };
+          
+    });
   });
 }
 
-// Event handler for user clicking the select-artist button
-$("#select-artist").on("click", function(event) {
+// Event handler for user clicking the location button
+$("#select-location").on("click", function(event) {
   // Preventing the button from trying to submit the form
   event.preventDefault();
-  // Storing the artist name
-  var inputArtist = $("#artist-input").val().trim();
 
-  // Running the searchBandsInTown function(passing in the artist as an argument)
-  searchHikingData(inputArtist);
+  // Running the openCageRun function(passing in the location as an argument)
+  openCageRun();
 });
